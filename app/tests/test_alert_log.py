@@ -1,6 +1,7 @@
 # tests/test_alert_log.py
 from datetime import datetime, timezone
 from decimal import Decimal
+import asyncio
 
 import pytest
 
@@ -82,7 +83,11 @@ async def test_alert_log_marked_failed_when_telegram_send_fails(
     )
 
     assert response.status_code == 201
+    await asyncio.sleep(0.1)
 
+    result = await db_session.execute(
+        select(AlertLog).order_by(AlertLog.id.desc())
+    )
     result = await db_session.execute(
         select(AlertLog).order_by(AlertLog.id.desc())
     )
