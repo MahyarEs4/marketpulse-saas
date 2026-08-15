@@ -1,0 +1,4 @@
+passlib[bcrypt]
+python-jose[cryptography]
+pydantic-settings>=2.0.0
+email-validator
